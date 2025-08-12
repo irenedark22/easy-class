@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EasyClass — Study Smart, Not Hard</title>
+
+  <!-- Friendly font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --purple:#8A2BE2;
+      --teal:#2EC4B6;
+      --coral:#FF6B6B;
+      --sun:#FFD166;
+      --bg:#FBFBFD;
+      --card:#FFFFFF;
+      --muted:#666;
+      --glass: rgba(255,255,255,0.6);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,Arial;
+      background: linear-gradient(180deg,#fbfbfd 0%, #f3f7fa 100%);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Header */
+    header{
+      background: linear-gradient(135deg,var(--purple),var(--teal));
+      color:white;
+      padding:2rem 1rem;
+      clip-path: ellipse(100% 85% at 50% 0%);
+      box-shadow: 0 8px 30px rgba(46,196,182,0.08);
+    }
+    .nav{
+      max-width:1100px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .brand{
+      display:flex;align-items:center;gap:.75rem;
+    }
+    .logo {
+      width:54px;height:54px;border-radius:12px;
+      background:linear-gradient(135deg,var(--sun),var(--coral));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;color:#fcfafa;box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      transform:rotate(-8deg);
+    }
+    .brand h1{font-size:1.25rem;margin:0}
+    .hero-cta{
+      display:flex;gap:.75rem;align-items:center;
+    }
+    .btn{
+      background: linear-gradient(135deg,var(--purple),var(--teal));
+      color:white;border:none;padding:.65rem 1rem;border-radius:10px;
+      font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,0.12);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .btn:hover{transform:translateY(-4px);box-shadow:0 18px 30px rgba(0,0,0,0.14)}
+    .btn.alt{background:transparent;border:2px solid rgba(255,255,255,0.18);color:white;padding:.5rem .85rem}
+
+    /* Main hero content */
+    .hero{
+      max-width:1100px;margin:auto;padding:3rem 1rem 4rem;display:flex;gap:2rem;align-items:center;justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .hero-left{flex:1 1 420px;min-width:260px}
+    .kicker{display:inline-block;background:var(--glass);backdrop-filter: blur(6px);padding:.35rem .6rem;border-radius:999px;font-weight:700;color:#0a0a0a;margin-bottom:1rem}
+    .title{font-size:2.2rem;line-height:1.05;margin:.3rem 0 1rem;color:#2c6eb9;text-shadow:0 6px 30px rgba(168, 167, 167, 0.658)}
+    .subtitle{color:rgba(17, 1, 10, 0.699);margin-bottom:1.2rem;font-weight:500}
+    .feature-row{display:flex;gap:.7rem;flex-wrap:wrap}
+    .pill{background:rgba(231, 4, 80, 0.87);padding:.45rem .65rem;border-radius:999px;color:#fff;font-weight:700;font-size:.9rem}
+
+    /* hero right illustration card */
+    .hero-right{flex:0 0 380px;min-width:260px}
+    .illustration{
+      background: linear-gradient(135deg,#fff, rgba(255,255,255,0.9));
+      border-radius:18px;padding:1.25rem;box-shadow:0 10px 30px rgba(20,20,60,0.06);
+    }
+    .stat{
+      display:flex;align-items:center;gap:1rem;margin-bottom:.7rem;
+    }
+    .stat .icon{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--purple));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;box-shadow:0 8px 24px rgba(46, 196, 181, 0.068)}
+    .stat p{margin:0}
+
+    /* Features section */
+    .features{
+      max-width:1100px;margin:1rem auto;padding:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;
+    }
+    .card{
+      background:var(--card);padding:1.2rem;border-radius:14px;box-shadow:0 6px 20px rgba(22, 22, 59, 0.5);transition:transform .15s ease;
+    }
+    .card:hover{transform:translateY(-6px)}
+    .card .big{font-size:1.45rem;font-weight:700;color:var(--purple)}
+    .card p{color:var(--muted);margin-top:.6rem}
+
+    /* Footer */
+    footer{max-width:1100px;margin:2rem auto;padding:2rem 1rem;text-align:center;color:var(--muted);font-size:.95rem}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .title{font-size:1.7rem}
+      .hero-right{order:2}
+      .hero-left{order:1}
+      .nav{padding-bottom:0}
+    }
+    @media (max-width:600px){
+      .hero{padding:2rem 1rem}
+      .title{font-size:1.4rem}
+      .brand h1{font-size:1rem}
+      .logo{width:46px;height:46px}
+      .feature-row{gap:.4rem}
+    }
+
+    /* small utility */
+    .center{display:flex;align-items:center;gap:.6rem}
+    a{color:inherit}
+  </style>
+</head>
+<body>
+
+  <!-- Header/Nav -->
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">EC</div>
+        <div>
+          <h1 style="margin:0;color:rgba(255,255,255,0.95)">EasyClass</h1>
+          <div style="font-size:.85rem;color:rgba(255,255,255,0.9)">Study smart • Plan easy</div>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <button class="btn" onclick="location.href='login.html'">Let’s Go 🚀</button>
+        <button class="btn alt" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">How it works</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" aria-label="hero">
+    <div class="hero-left">
+      <div class="kicker">Student Toolkit • Free</div>
+      <h2 class="title">Plan your week. Track your GPA. Stay on top — with style. 🎓</h2>
+      <p class="subtitle">EasyClass helps you organize your classes, compute your GPA instantly, and send simple class alerts. Built for students who want to actually enjoy studying.</p>
+
+      <div class="feature-row">
+        <div class="pill">📅 Smart Timetable</div>
+        <div class="pill">🧠 GPA Calculator</div>
+        <div class="pill">🔔 Class Alerts</div>
+      </div>
+
+      <div style="margin-top:1.2rem">
+        <button class="btn" onclick="location.href='gpa.html'">Try GPA →</button>
+        <button class="btn alt" onclick="location.href='schedule.html'">Open Schedule</button>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="illustration">
+        <div class="stat">
+          <div class="icon">📈</div>
+          <div>
+            <p style="font-weight:700;margin-bottom:4px">Track Progress</p>
+            <p style="margin:0;color:var(--muted)">See your GPA grow as you enter grades.</p>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="icon">🗓️</div>
+          <div>
+            <p style="font-weight:700;margin-bottom:4px">Weekly Planner</p>
+            <p style="margin:0;color:var(--muted)">Organize classes & study blocks in seconds.</p>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="icon">💬</div>
+          <div>
+            <p style="font-weight:700;margin-bottom:4px">Class Alerts</p>
+            <p style="margin:0;color:var(--muted)">Simple reminders so you never miss a lecture.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Feature Cards -->
+  <section id="how" class="features" aria-label="features">
+    <div class="card">
+      <div class="big">GPA Calculator</div>
+      <p>Quickly add courses, credits and grades — EasyClass calculates term GPA for you.</p>
+    </div>
+
+    <div class="card">
+      <div class="big">Schedule Planner</div>
+      <p>Build a weekly timetable, visualize clashes, and see your day at a glance.</p>
+    </div>
+
+    <div class="card">
+      <div class="big">Alerts & Notes</div>
+      <p>Set simple class reminders and keep short notes for every course.</p>
+    </div>
+
+    <div class="card">
+      <div class="big">Export & Share</div>
+      <p>Download your timetable or share your schedule with study buddies (coming soon).</p>
+    </div>
+  </section>
+
+  <footer>
+    <div style="max-width:1100px;margin:auto;">
+      <p style="margin:0 0 .5rem">Made with ❤️ — EasyClass</p>
+      <small style="color:var(--muted)">Tip: Click "Let’s Go" to log in and try the tools. We'll build the rest together.</small>
+    </div>
+  </footer>
+
+  <script>
+    // small subtle micro-interaction: pulse CTA briefly on load
+    window.addEventListener('load', () => {
+      const cta = document.querySelector('.btn');
+      if(!cta) return;
+      cta.animate([
+        { transform: 'translateY(0) scale(1)' },
+        { transform: 'translateY(-3px) scale(1.03)' },
+        { transform: 'translateY(0) scale(1)' }
+      ], { duration: 900, iterations: 1, easing: 'ease-out' });
+    });
+  </script>
+</body>
+</html>

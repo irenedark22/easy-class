@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EasyClass - GPA Calculator</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        background: #f4f6f8;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .ec-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+      }
+      .ec-box {
+        background: radial-gradient(circle at top left, #ffd700, #ffa500);
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(-8deg);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+      .ec-box span {
+        transform: rotate(8deg);
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: white;
+      }
+      .ec-name {
+        font-size: 1.5rem;
+        color: #333;
+        font-weight: 700;
+      }
+      nav {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem 0 1rem 2rem;
+        background: #6c63ff;
+        color: #fff;
+        position: relative;
+      }
+      nav .logo {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      nav .logo img {
+        height: 40px;
+        margin-left: 0.5rem;
+      }
+      nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        margin-left: auto;
+        padding-right: 2rem;
+      }
+      nav ul li {
+        margin-right: 1.5rem;
+        /* Remove right margin for last item */
+      }
+      nav ul li:last-child {
+        margin-right: 0;
+      }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      nav ul li a:hover {
+        color: #ffd700;
+      }
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+      .menu-toggle div {
+        width: 25px;
+        height: 3px;
+        background: white;
+        margin: 4px 0;
+      }
+      @media (max-width: 768px) {
+        nav ul {
+          display: none;
+          flex-direction: column;
+          background: #6c63ff;
+          position: absolute;
+          top: 60px;
+          right: 0;
+          width: 200px;
+          padding: 1rem;
+        }
+        nav ul.active {
+          display: flex;
+        }
+        .menu-toggle {
+          display: flex;
+        }
+      }
+
+      main {
+        flex-grow: 1;
+        max-width: 600px;
+        margin: 2rem auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(108, 99, 255, 0.2);
+      }
+      h1 {
+        text-align: center;
+        color: #6c63ff;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      label {
+        font-weight: 600;
+        color: #333;
+        text-align: left;
+      }
+      input[type="number"] {
+        padding: 0.8rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        font-size: 1rem;
+        outline-color: #6c63ff;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      button {
+        background: #6c63ff;
+        color: white;
+        padding: 1rem;
+        border: none;
+        border-radius: 15px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 1rem;
+      }
+      button:hover {
+        background: #5848d9;
+      }
+      .result {
+        margin-top: 2rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo" onclick="location.href='dashboard.html'">
+        <div class="ec-logo">
+          <div class="ec-box"><span>EC</span></div>
+          <span>EasyClass</span>
+        </div>
+      </div>
+      <div class="nav-spacer"></div>
+      <div
+        class="menu-toggle"
+        onclick="document.querySelector('nav ul').classList.toggle('active')"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>GPA Calculator</h1>
+      <form id="gpaForm">
+        <label for="grade1">Grade 1 (0.0 - 4.0)</label>
+        <input
+          type="number"
+          id="grade1"
+          name="grade1"
+          min="0"
+          max="4"
+          step="0.01"
+          required
+        />
+
+        <label for="grade2">Grade 2 (0.0 - 4.0)</label>
+        <input
+          type="number"
+          id="grade2"
+          name="grade2"
+          min="0"
+          max="4"
+          step="0.01"
+          required
+        />
+
+        <label for="grade3">Grade 3 (0.0 - 4.0)</label>
+        <input
+          type="number"
+          id="grade3"
+          name="grade3"
+          min="0"
+          max="4"
+          step="0.01"
+          required
+        />
+
+        <label for="grade4">Grade 4 (0.0 - 4.0)</label>
+        <input
+          type="number"
+          id="grade4"
+          name="grade4"
+          min="0"
+          max="4"
+          step="0.01"
+          required
+        />
+
+        <button type="submit">Calculate GPA</button>
+      </form>
+
+      <div class="result" id="result"></div>
+    </main>
+
+    <script>
+      document
+        .getElementById("gpaForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get grades from inputs and parse to floats
+          const grades = [
+            parseFloat(document.getElementById("grade1").value),
+            parseFloat(document.getElementById("grade2").value),
+            parseFloat(document.getElementById("grade3").value),
+            parseFloat(document.getElementById("grade4").value),
+          ];
+
+          // Validate grades
+          for (const g of grades) {
+            if (isNaN(g) || g < 0 || g > 4) {
+              alert("Please enter valid grades between 0.0 and 4.0");
+              return;
+            }
+          }
+
+          // Calculate average GPA
+          const total = grades.reduce((acc, curr) => acc + curr, 0);
+          const gpa = (total / grades.length).toFixed(2);
+
+          // Show result
+          document.getElementById("result").textContent = `Your GPA is: ${gpa}`;
+        });
+    </script>
+  </body>
+</html>

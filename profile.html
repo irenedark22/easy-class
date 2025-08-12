@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EasyClass - Profile</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        background: #f4f6f8;
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      nav {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem 0 1rem 2rem;
+        background: #6c63ff;
+        color: #fff;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .ec-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+      }
+      .ec-box {
+        background: radial-gradient(circle at top left, #ffd700, #ffa500);
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(-8deg);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+      .ec-box span {
+        transform: rotate(8deg);
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: white;
+      }
+      .nav-spacer {
+        flex: 1 1 auto;
+      }
+      nav .logo {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      nav .logo img {
+        height: 40px;
+        margin-right: 0.5rem;
+      }
+      nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav ul li {
+        margin-left: 1.5rem;
+      }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      nav ul li a:hover {
+        color: #ffd700;
+      }
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+      .menu-toggle div {
+        width: 25px;
+        height: 3px;
+        background: white;
+        margin: 4px 0;
+      }
+      @media (max-width: 768px) {
+        nav ul {
+          display: none;
+          flex-direction: column;
+          background: #6c63ff;
+          position: absolute;
+          top: 60px;
+          right: 0;
+          width: 200px;
+          padding: 1rem;
+        }
+        nav ul.active {
+          display: flex;
+        }
+        .menu-toggle {
+          display: flex;
+        }
+      }
+
+      main {
+        flex-grow: 1;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+      }
+
+      h1 {
+        color: #6c63ff;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+
+      label {
+        font-weight: 600;
+        color: #555;
+      }
+
+      input,
+      textarea {
+        padding: 0.8rem;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+        resize: vertical;
+      }
+
+      button {
+        margin-top: 1rem;
+        padding: 0.8rem;
+        background: #6c63ff;
+        border: none;
+        color: white;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 1rem;
+      }
+      button:hover {
+        background: #5848d9;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo" onclick="location.href='dashboard.html'">
+        <div class="ec-logo">
+          <div class="ec-box"><span>EC</span></div>
+          <span>EasyClass</span>
+        </div>
+      </div>
+      <div class="nav-spacer"></div>
+      <div
+        class="menu-toggle"
+        onclick="document.querySelector('nav ul').classList.toggle('active')"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>Your Profile</h1>
+      <form id="profileForm">
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          id="fullName"
+          placeholder="Enter your full name"
+          required
+        />
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+
+        <label for="bio">Bio</label>
+        <textarea
+          id="bio"
+          rows="4"
+          placeholder="Tell us about yourself"
+        ></textarea>
+
+        <button type="submit">Save Profile</button>
+      </form>
+    </main>
+
+    <script>
+      // Load saved profile data
+      window.onload = () => {
+        const profile = JSON.parse(localStorage.getItem("userProfile"));
+        if (profile) {
+          document.getElementById("fullName").value = profile.fullName || "";
+          document.getElementById("email").value = profile.email || "";
+          document.getElementById("bio").value = profile.bio || "";
+        }
+      };
+
+      // Save profile on submit
+      document.getElementById("profileForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fullName = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const bio = document.getElementById("bio").value.trim();
+
+        localStorage.setItem(
+          "userProfile",
+          JSON.stringify({ fullName, email, bio })
+        );
+        alert("Profile saved successfully!");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EasyClass - Weekly Planner</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        background: #f4f6f8;
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      nav {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem 0 1rem 2rem;
+        background: #6c63ff;
+        color: #fff;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .ec-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+      }
+      .ec-box {
+        background: radial-gradient(circle at top left, #ffd700, #ffa500);
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(-8deg);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+      .ec-box span {
+        transform: rotate(8deg);
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: white;
+      }
+      .nav-spacer {
+        flex: 1 1 auto;
+      }
+      nav .logo {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      nav .logo img {
+        height: 40px;
+        margin-right: 0.5rem;
+      }
+      nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav ul li {
+        margin-left: 1.5rem;
+      }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      nav ul li a:hover {
+        color: #ffd700;
+      }
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+      .menu-toggle div {
+        width: 25px;
+        height: 3px;
+        background: white;
+        margin: 4px 0;
+      }
+      @media (max-width: 768px) {
+        nav ul {
+          display: none;
+          flex-direction: column;
+          background: #6c63ff;
+          position: absolute;
+          top: 60px;
+          right: 0;
+          width: 200px;
+          padding: 1rem;
+        }
+        nav ul.active {
+          display: flex;
+        }
+        .menu-toggle {
+          display: flex;
+        }
+      }
+
+      main {
+        flex-grow: 1;
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      h1 {
+        color: #6c63ff;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .planner {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 0 auto 3rem auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+      th,
+      td {
+        padding: 12px 8px;
+        border: 1px solid #ddd;
+      }
+      th {
+        background: #6c63ff;
+        color: white;
+      }
+      input[type="text"],
+      input[type="time"] {
+        width: 90%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 0.9rem;
+      }
+      input[type="time"] {
+        padding: 3px 5px;
+      }
+
+      button {
+        margin-top: 1rem;
+        padding: 0.8rem 1.5rem;
+        background: #6c63ff;
+        border: none;
+        color: white;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      button:hover {
+        background: #5848d9;
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        .planner {
+          max-width: 100%;
+        }
+        table,
+        th,
+        td {
+          font-size: 0.85rem;
+        }
+        input[type="text"],
+        input[type="time"] {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo" onclick="location.href='dashboard.html'">
+        <div class="ec-logo">
+          <div class="ec-box"><span>EC</span></div>
+          <span>EasyClass</span>
+        </div>
+      </div>
+      <div class="nav-spacer"></div>
+      <div
+        class="menu-toggle"
+        onclick="document.querySelector('nav ul').classList.toggle('active')"
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>Weekly Planner</h1>
+
+      <div class="planner">
+        <form id="plannerForm">
+          <table>
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Task</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monday</td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Enter task"
+                    name="mondayTask"
+                  />
+                </td>
+                <td><input type="time" name="mondayStart" /></td>
+                <td><input type="time" name="mondayEnd" /></td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Enter task"
+                    name="tuesdayTask"
+                  />
+                </td>
+                <td><input type="time" name="tuesdayStart" /></td>
+                <td><input type="time" name="tuesdayEnd" /></td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Enter task"
+                    name="wednesdayTask"
+                  />
+                </td>
+                <td><input type="time" name="wednesdayStart" /></td>
+                <td><input type="time" name="wednesdayEnd" /></td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Enter task"
+                    name="thursdayTask"
+                  />
+                </td>
+                <td><input type="time" name="thursdayStart" /></td>
+                <td><input type="time" name="thursdayEnd" /></td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Enter task"
+                    name="fridayTask"
+                  />
+                </td>
+                <td><input type="time" name="fridayStart" /></td>
+                <td><input type="time" name="fridayEnd" /></td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Enter task"
+                    name="saturdayTask"
+                  />
+                </td>
+                <td><input type="time" name="saturdayStart" /></td>
+                <td><input type="time" name="saturdayEnd" /></td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Enter task"
+                    name="sundayTask"
+                  />
+                </td>
+                <td><input type="time" name="sundayStart" /></td>
+                <td><input type="time" name="sundayEnd" /></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button type="button" onclick="savePlan()">Save Plan</button>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      function savePlan() {
+        const form = document.getElementById("plannerForm");
+        const data = {};
+        const days = [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday",
+          "sunday",
+        ];
+
+        days.forEach((day) => {
+          data[day] = {
+            task: form[`${day}Task`].value,
+            start: form[`${day}Start`].value,
+            end: form[`${day}End`].value,
+          };
+        });
+
+        // For demo: save to localStorage (you can extend this to backend)
+        localStorage.setItem("weeklyPlan", JSON.stringify(data));
+        alert("Your weekly plan has been saved!");
+      }
+
+      // Load saved plan on page load
+      window.onload = () => {
+        const savedPlan = JSON.parse(localStorage.getItem("weeklyPlan"));
+        if (savedPlan) {
+          const form = document.getElementById("plannerForm");
+          Object.keys(savedPlan).forEach((day) => {
+            form[`${day}Task`].value = savedPlan[day].task;
+            form[`${day}Start`].value = savedPlan[day].start;
+            form[`${day}End`].value = savedPlan[day].end;
+          });
+        }
+      };
+    </script>
+  </body>
+</html>
