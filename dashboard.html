@@ -190,7 +190,10 @@
     </nav>
 
     <div class="dashboard">
-      <p class="greeting">Hey Alex <span style="font-size: 1.5rem">👋</span></p>
+      <p class="greeting" id="dashboardGreeting">
+        Hey <span id="dashboardName">there</span>
+        <span style="font-size: 1.5rem">👋</span>
+      </p>
       <h1>Welcome to Your Dashboard</h1>
       <div class="cards">
         <a href="schedule.html" class="card">📅 Class Schedule</a>
@@ -205,6 +208,19 @@
       document.querySelector(".menu-toggle").addEventListener("click", () => {
         document.querySelector("nav ul").classList.toggle("active");
       });
+
+      // Set greeting name from localStorage profile
+      window.addEventListener("DOMContentLoaded", () => {
+        try {
+          const profile = JSON.parse(localStorage.getItem("userProfile"));
+          if (profile && profile.fullName) {
+            document.getElementById("dashboardName").textContent =
+              profile.fullName.split(" ")[0];
+          }
+        } catch (e) {}
+      });
     </script>
   </body>
 </html>
+
+
